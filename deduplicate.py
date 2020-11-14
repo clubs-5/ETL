@@ -3,7 +3,7 @@ import io
 
 file = input('Give me a json file name without extension: ')
 g = open('{}.json'.format(file), 'r', encoding= 'utf8')
-data = json.load(g.read())
+data = json.loads(g.read())
 uni = []
 
 for i in data:
