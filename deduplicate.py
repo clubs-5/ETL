@@ -12,7 +12,7 @@ for i in data:
 
 jstring = json.dumps(uni)
 
-with open("{}_fixed.json", 'a', encoding='utf8') as obj:
+with open("{}_fixed.json".format(file), 'a', encoding='utf8') as obj:
     obj.write(jstring)
 
 
