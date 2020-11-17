@@ -1,15 +1,15 @@
 #!/bin/bash
 
-echo "Enter the json file to be fixed"
-read json_file
+#echo "Enter the json file to be fixed"
+#read $1
 
 #find " }{ " pattern and replace it with " },{ "
-sed -i 's/\}{/\},{/g' $json_file
+sed -i 's/\}{/\},{/g' $1
 
 #add " [ " to the beginning of the file
-sed -i '1i\[' $json_file
+sed -i '1i\[' $1
 
 #append " ] " to the end of the file
-sed -i '$a\]' $json_file
+sed -i '$a\]' $1
 
-echo "Your $json_file has been fixed"
+echo "Your $1 has been fixed"
