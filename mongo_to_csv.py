@@ -64,6 +64,9 @@ for i in result:
 #now we create a pandas dataframe 
 df = pd.DataFrame(show_tomato, columns = ['Show', 'Season', 'User_Ratings', 'Audience_Score', 'Critic_Ratings', 'Tomatometer'])
 
+#write to csv file
+
+df.to_csv('./out_csv.csv', encoding='utf-8', index= False)
 print(df)
 # with open('out.csv', 'a', encoding='utf8') as obj:
 #     for i in result:
