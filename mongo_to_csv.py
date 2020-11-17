@@ -5,9 +5,14 @@ import pandas as pd
 # Requires the PyMongo package.
 # https://api.mongodb.com/python/current
 
-#get desired json values
-client = MongoClient('mongodb://192.168.33.101:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
-result = client['TVShows']['ff'].aggregate([
+
+mongodb_location = input('Give me your MongoDB IP or FQDN: ')
+db_name = input('Give me the DB name: ')
+collection_name = input('Give me the collection name: ')
+client = MongoClient('mongodb://{}:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'.format(mongodb_location))
+
+#project desired json values
+result = client['{}'.format(db_name)]['{}'.format(collection_name)].aggregate([
     {
         '$project': {
             '_id': 0, 
