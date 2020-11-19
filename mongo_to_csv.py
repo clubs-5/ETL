@@ -6,7 +6,11 @@ import pandas as pd
 # https://api.mongodb.com/python/current
 
 
+<<<<<<< HEAD
 mongodb_location = input('Give me your MongoDB IP or FQDN(Default port is 27017): ')
+=======
+mongodb_location = input('Give me your MongoDB IP or FQDN: ')
+>>>>>>> 89693463d8d5594f4ea3433f527ef9b4911d37fa
 db_name = input('Give me the DB name: ')
 collection_name = input('Give me the collection name: ')
 client = MongoClient('mongodb://{}:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'.format(mongodb_location))
