@@ -1,16 +1,13 @@
 from pymongo import MongoClient
 import pandas as pd
+import re
 
 
 # Requires the PyMongo package.
 # https://api.mongodb.com/python/current
 
 
-<<<<<<< HEAD
 mongodb_location = input('Give me your MongoDB IP or FQDN(Default port is 27017): ')
-=======
-mongodb_location = input('Give me your MongoDB IP or FQDN: ')
->>>>>>> 89693463d8d5594f4ea3433f527ef9b4911d37fa
 db_name = input('Give me the DB name: ')
 collection_name = input('Give me the collection name: ')
 client = MongoClient('mongodb://{}:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false'.format(mongodb_location))
@@ -27,7 +24,7 @@ result = client['{}'.format(db_name)]['{}'.format(collection_name)].aggregate([
         }
     }, {
         '$project': {
-            'tomato.v.Year': 0, 
+            
             'tomato.v.consensus': 0, 
             'tomato.v.Reviews': 0
         }
@@ -46,7 +43,7 @@ n =1
 #iterate through each tv show (document is this case) to create a list of tuples
 for i in result:
     x = 1
-    
+    #print(i)
     name = i['Show']
 
 
@@ -56,9 +53,18 @@ for i in result:
 
             try: 
                 season = i['tomato']['Season {}'.format(x)]
+                
                 if season:
+                   year_str = season['Year']
+                   #print(year_str)
+                   year = re.findall(r'\d+', year_str)
+                   #print(year)
+                #    for s in year_str.split():
+                #        if s.isdiit():
+                #            year.append(s)
+                #    print(year)
                    s =  int(season['Critic_Ratings']) #Becasue I forgot to turn critic rating into integer while crawling
-                   season_tuple = (name, x, season['User_ratings'], season['audience_score'], s, season['tomatometer'])
+                   season_tuple = (year[0], name, x, season['User_ratings'], season['audience_score'], s, season['tomatometer'])
                    show_tomato.append(season_tuple) 
        
             except:
@@ -71,12 +77,12 @@ for i in result:
 
 
 #now we create a pandas dataframe 
-df = pd.DataFrame(show_tomato, columns = ['Show', 'Season', 'User_Ratings', 'Audience_Score', 'Critic_Ratings', 'Tomatometer'])
-
+df = pd.DataFrame(show_tomato, columns = ['Year', 'Show', 'Season', 'User_Ratings', 'Audience_Score', 'Critic_Ratings', 'Tomatometer'])
+print(df)
 #write to csv file
 
 df.to_csv('./out_csv.csv', encoding='utf-8', index= False)
-print(df)
+
 # with open('out.csv', 'a', encoding='utf8') as obj:
 #     for i in result:
 
