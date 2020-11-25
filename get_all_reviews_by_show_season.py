@@ -1,9 +1,10 @@
 from pymongo import MongoClient
+from hdfs3 import HDFileSystem
 
 # Requires the PyMongo package.
 # https://api.mongodb.com/python/current
 
-
+#hdfs = HDFileSystem=(host='master.tibame', port=8020)
 client = MongoClient('mongodb://192.168.33.101:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
 result = client['TVShows']['ff'].aggregate([
     {
@@ -49,9 +50,10 @@ for i in result:
                 if season:
                     print('Season {}'.format(x))
                     for review in season['Reviews']:
-                        with open('{name}_s{num}.txt'.format(name=show,num=x),'a', encoding='utf8') as txt:
+                        #with hdfs.open('/user/clubs/project')
+                        with open('reviews/{name}_s{num}.txt'.format(name=show,num=x),'a', encoding='utf8') as txt:
                             txt.write(review['content'] + '\n')
-                        print(review['content'])
+                        #print(review['content'])
                 print("================")
 
             except:
@@ -60,6 +62,6 @@ for i in result:
         else:
             break
         x += 1
-    
+    print('{} done'.format(show))
     #print(i['tomato']['Season 1']['Reviews'][0]['content'])
-    break
+    
