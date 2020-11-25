@@ -3,13 +3,6 @@ from pymongo import MongoClient
 # Requires the PyMongo package.
 # https://api.mongodb.com/python/current
 
-client = MongoClient('mongodb://192.168.33.101:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
-# Requires the PyMongo package.
-# https://api.mongodb.com/python/current
-
-client = MongoClient('mongodb://192.168.33.101:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
-# Requires the PyMongo package.
-# https://api.mongodb.com/python/current
 
 client = MongoClient('mongodb://192.168.33.101:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
 result = client['TVShows']['ff'].aggregate([
@@ -47,15 +40,16 @@ result = client['TVShows']['ff'].aggregate([
 
 for i in result:
     x = 1
-
-    while i['Show']: #iterate through each available season, assuming no more than 20 seasons
-        if x < 3: 
+    show=i['Show']
+    
+    while i['Show']: 
+        if x < 21: #iterate through each available season, assuming no more than 20 seasons
             try:
                 season = i['tomato']['Season {}'.format(x)]
                 if season:
                     print('Season {}'.format(x))
                     for review in season['Reviews']:
-                        with open('test.txt','a', encoding='utf8') as txt:
+                        with open('{name}_s{num}.txt'.format(name=show,num=x),'a', encoding='utf8') as txt:
                             txt.write(review['content'] + '\n')
                         print(review['content'])
                 print("================")
