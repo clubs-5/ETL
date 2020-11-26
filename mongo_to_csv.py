@@ -39,10 +39,10 @@ result = client['{}'.format(db_name)]['{}'.format(collection_name)].aggregate([
 ])
 
 show_tomato = []
-n =1
+
 #iterate through each tv show (document is this case) to create a list of tuples
 for i in result:
-    x = 1
+    x = 1 #for season counting 
     #print(i)
     name = i['Show']
 
@@ -57,7 +57,7 @@ for i in result:
                 if season:
                    year_str = season['Year']
                    #print(year_str)
-                   year = re.findall(r'\d+', year_str)
+                   year = re.findall(r'\d+', year_str) # get season year
                    #print(year)
                 #    for s in year_str.split():
                 #        if s.isdiit():
