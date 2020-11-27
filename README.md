@@ -9,3 +9,8 @@
 * 重複物件
 * 所有的 Season 應屬於同一個 field
 
+## 解決方式
+* bash script 增加 [ 和 ]
+* bash script 刪除空值物件
+* deduplicate.py 這支檔案用來刪除重複物件
+* bash script 將所有 Season 物件放在 "tomato" field 底下
